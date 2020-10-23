@@ -1,4 +1,5 @@
 package com.crud.tasks.domain;
 
-public class git Task000 {
+public class Task000 {
+
 }
