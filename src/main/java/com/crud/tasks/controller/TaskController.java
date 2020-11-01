@@ -29,7 +29,8 @@ public class TaskController {
     public TaskDto          get19_2Task(Long id) { return new TaskDto(1L,"title","test content");}
 
     @RequestMapping(method = RequestMethod.DELETE,value = "deleteTask")
-    public  void            deleteTask(Long taskId)    { }
+    public  void            deleteTask(@RequestParam Long taskId)  throws TaskNotFoundException  {
+        taskMapper.mapToTaskDto(service.delTask(taskId));}
 
     @RequestMapping(method = RequestMethod.PUT,value = "updateTask")
     public  TaskDto         updateTask(TaskDto taskDto)  { return new TaskDto(1L,"Edited title","Edited content");}
