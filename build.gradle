@@ -2,7 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.3.4.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
 	id 'java'
-	id 'war'
+//21.5	id 'war'
 }
 group = 'com.crud'
 version = '0.0.1-SNAPSHOT'
@@ -24,9 +24,11 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.projectlombok:lombok')
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
-	compile('mysql:mysql-connector-java')
+//21.5 compile('mysql:mysql-connector-java')
+//21.5 str 43 zamiana mysql	na postgresql
+	compile('org.postgresql:postgresql')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
-	providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+//21.5 providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 }
 test {
 	useJUnitPlatform()
