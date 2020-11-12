@@ -24,9 +24,9 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.projectlombok:lombok')
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
-//21.5 compile('mysql:mysql-connector-java')
+compile('mysql:mysql-connector-java')
 //21.5 str 43 zamiana mysql	na postgresql
-	compile('org.postgresql:postgresql')
+//	compile('org.postgresql:postgresql')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 //21.5 providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 }
