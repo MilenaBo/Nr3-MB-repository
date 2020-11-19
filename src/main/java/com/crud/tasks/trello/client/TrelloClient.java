@@ -1,5 +1,7 @@
 package com.crud.tasks.trello.client;
 
+import com.crud.tasks.domain.CreatedTrelloBadges;
+import com.crud.tasks.domain.CreatedTrelloCardAndBadges;
 import com.crud.tasks.domain.TrelloBoardDto;
 import com.crud.tasks.domain.TrelloCardDto;
 import com.crud.tasks.mapper.CreatedTrelloCard;
@@ -56,6 +58,7 @@ private static final Logger LOGGER = LoggerFactory.getLogger(TrelloClient.class)
         }
     }
 
+    // w TrelloController  "getTrelloBoardsTEMPORARY"
     public List<TrelloBoardDto> getTrelloBoardsTEMPORARY() {
         LOGGER.info("*********** Starting my getTrelloBoardsTEMPORARY/TrelloClient 22.2 punkt 2 budowanie URL");
         URI url = adresURL(trelloApiEndpoint,trelloAppKey,trelloToken,trelloUserName);
@@ -81,5 +84,23 @@ private static final Logger LOGGER = LoggerFactory.getLogger(TrelloClient.class)
 
         return restTemplate.postForObject(url, null, CreatedTrelloCard.class);
     }
+//22.3
+
+    public CreatedTrelloBadges createNewBadges(TrelloCardDto trelloCardDto) {
+        LOGGER.info("*********** Starting my createNewCar/TrelloClient 22.");
+        URI url = UriComponentsBuilder.fromHttpUrl(trelloApiEndpoint + "/cards")
+                .queryParam("key", trelloAppKey)
+                .queryParam("token", trelloToken)
+                .queryParam("name", trelloCardDto.getName())
+                .queryParam("desc", trelloCardDto.getDescription())
+                .queryParam("pos", trelloCardDto.getPos())
+                .queryParam("idList", trelloCardDto.getListId()).build().encode().toUri();
+               // .queryParam("card",trelloCardDto.getCard()
+                   //     .queryParam()
+                     //   .build().encode().toUri();
+
+        return restTemplate.postForObject(url, null, CreatedTrelloBadges.class);
+    }
+
 
 }

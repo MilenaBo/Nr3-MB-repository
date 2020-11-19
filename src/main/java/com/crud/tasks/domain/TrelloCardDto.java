@@ -12,5 +12,9 @@ public class TrelloCardDto {
     private String description;
     private String pos;
     private String listId;
+    private int card;
+    private int board;
+    private int votes;
+    private String id; //identyfikator karty
 
     }
