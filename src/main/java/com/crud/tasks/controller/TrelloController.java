@@ -1,7 +1,6 @@
 package com.crud.tasks.controller;
 
 import com.crud.tasks.domain.CreatedTrelloBadges;
-import com.crud.tasks.domain.CreatedTrelloCardAndBadges;
 import com.crud.tasks.domain.TrelloBoardDto;
 import com.crud.tasks.domain.TrelloCardDto;
 import com.crud.tasks.mapper.CreatedTrelloCard;
@@ -19,6 +18,7 @@ public class TrelloController {
     @Autowired
     private TrelloClient trelloClient;
 
+    //mod 22.4 s 42
     @RequestMapping(method = RequestMethod.GET, value = "getTrelloBoards")
     public List<TrelloBoardDto> getTrelloBoards()   {
         return trelloClient.getTrelloBoards();

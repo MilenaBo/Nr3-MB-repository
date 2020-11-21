@@ -20,12 +20,6 @@ public class TaskController {
     @Autowired
     private TaskMapper taskMapper;
 
-    //mod 22.4 s 42
-//    @RequestMapping(method = RequestMethod.GET, value = "getTrelloBoards")
-//    public  List<TrelloBoardDto> getTrelloBoards() {
-//        return trelloClient.getTrelloBoards();
-//    }
-
     @RequestMapping(method = RequestMethod.GET,value = "getTasks")
     public List<TaskDto>    getTasks()     { return  taskMapper.mapToTaskDtoList(service.getAllTasks());}
 

@@ -25,7 +25,7 @@ public class CoreConfiguration implements WebMvcConfigurer {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.any())
-               // .paths(PathSelectors.any())
+               // .paths(PathSelectors.any()) zmiana w 23.2 na poniżej Ograniczenie skanowania w Swaggerze
                 .paths(regex("/api/com.crud.tasks.controller"))
                 .build();
     }
