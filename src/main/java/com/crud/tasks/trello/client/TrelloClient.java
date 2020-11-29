@@ -1,7 +1,7 @@
 package com.crud.tasks.trello.client;
 
+import com.crud.tasks.config.TrelloConfig;
 import com.crud.tasks.domain.CreatedTrelloBadges;
-//import com.crud.tasks.domain.CreatedTrelloCardAndBadges;
 import com.crud.tasks.domain.TrelloBoardDto;
 import com.crud.tasks.domain.TrelloCardDto;
 import com.crud.tasks.mapper.CreatedTrelloCard;
@@ -25,6 +25,7 @@ import static java.util.Optional.ofNullable;
 public class TrelloClient {
 private static final Logger LOGGER = LoggerFactory.getLogger(TrelloClient.class);
 
+// 22.4s45 opakujemy te pola w klasę TrelloConfig >>>> na razie nie robię22.4
     @Value("${trello.api.endpoint.prod}")
     private String trelloApiEndpoint;
     @Value("${trello.app.key}")
@@ -33,6 +34,9 @@ private static final Logger LOGGER = LoggerFactory.getLogger(TrelloClient.class)
     private String trelloToken;
     @Value("${trello.app.username}")
     private String trelloUserName;
+
+//    @Autowired na razie nie robię22.4
+//    private TrelloConfig trelloConfig;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -85,7 +89,6 @@ private static final Logger LOGGER = LoggerFactory.getLogger(TrelloClient.class)
         return restTemplate.postForObject(url, null, CreatedTrelloCard.class);
     }
 //22.3
-
     public CreatedTrelloBadges createNewBadges(TrelloCardDto trelloCardDto) {
         LOGGER.info("*********** Starting my createNewCar/TrelloClient 22.");
         URI url = UriComponentsBuilder.fromHttpUrl(trelloApiEndpoint + "/cards")
@@ -101,6 +104,4 @@ private static final Logger LOGGER = LoggerFactory.getLogger(TrelloClient.class)
 
         return restTemplate.postForObject(url, null, CreatedTrelloBadges.class);
     }
-
-
 }

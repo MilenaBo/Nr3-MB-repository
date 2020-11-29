@@ -14,6 +14,7 @@ public class Badges {
 
     @JsonProperty("votes")
     private int votes;
-    @JsonProperty("attachments")
-    private AttachmentsByType attachments;
+ //zakomentowano na spotkaniu 29.11.20
+//    @JsonProperty("attachments")
+//    private AttachmentsByType attachments;
 }
