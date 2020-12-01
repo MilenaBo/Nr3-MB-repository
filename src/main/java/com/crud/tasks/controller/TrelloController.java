@@ -1,33 +1,48 @@
 package com.crud.tasks.controller;
 //22chyba
 //23.4 s52 wstrzykuję TrelloService, która ma wstrzyknięty Trello Client
+//29.s9 zmiany wstrzyknięta TrelloFacade
 
-import com.crud.tasks.domain.CreatedTrelloBadges;
 import com.crud.tasks.domain.TrelloBoardDto;
 import com.crud.tasks.domain.TrelloCardDto;
-import com.crud.tasks.mapper.CreatedTrelloCard;
+import com.crud.tasks.domain.CreatedTrelloCardDto;
 import com.crud.tasks.service.TrelloService;
-import com.crud.tasks.trello.client.TrelloClient;
+import com.crud.tasks.trello.facade.TrelloFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/v1/trello")
-@CrossOrigin("*")
 public class TrelloController {
 
+    @Autowired
+    private TrelloFacade trelloFacade;
+
+    @RequestMapping(method = RequestMethod.GET, value = "/getTrelloBoards")
+    public List<TrelloBoardDto> getTrelloBoards() {
+        return trelloFacade.fetchTrelloBoards();
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/createTrelloCard")
+    public CreatedTrelloCardDto createdTrelloCard(@RequestBody TrelloCardDto trelloCardDto) {
+        return trelloFacade.createCard(trelloCardDto);
+    }
+}
+
+//powyżej 29s9
+// poniżej zmiany dokonywane w poszczególnych modułach
 //    @Autowired zmana w 23.4
 //    private TrelloClient trelloClient;
 
-    @Autowired
-    private TrelloService trelloService;
-    //mod 23.4 s 52
-    @RequestMapping(method = RequestMethod.GET, value = "/getTrelloBoards")
-    public List<TrelloBoardDto> getTrelloBoards()   {
-        return trelloService.fetchTrelloBoards();
-    }
+//    @Autowired   zmiana 29.1s9
+//    private TrelloService trelloService;
+    //mod 23.4 s 52; zmiana 29s9
+//@RequestMapping(method = RequestMethod.GET, value = "/getTrelloBoards")
+//public List<TrelloBoardDto> getTrelloBoards() {
+//    return trelloService.fetchTrelloBoards();}
 
 //    //mod 22.4 s 42
 //    @RequestMapping(method = RequestMethod.GET, value = "getTrelloBoards")
@@ -74,14 +89,13 @@ public class TrelloController {
 //                });
 //    }
 ///////////////////////////////////////////////////////////////
-
-    @RequestMapping(method = RequestMethod.POST, value = "/createTrelloCard")
-    public CreatedTrelloCard createdTrelloCard(@RequestBody TrelloCardDto trelloCardDto) {
-        return trelloService.createdTrelloCard(trelloCardDto);
-    }
+//poniżej zmiana 29s9
+//    @RequestMapping(method = RequestMethod.POST, value = "/createTrelloCard")
+//    public CreatedTrelloCardDto createdTrelloCard(@RequestBody TrelloCardDto trelloCardDto) {
+//        return trelloService.createdTrelloCard(trelloCardDto);
+//    }
 //22.3, zablokowałam w 23.4
 //    @RequestMapping(method = RequestMethod.POST, value = "createdTrelloBadges")
 //    public CreatedTrelloBadges createdTrelloBadges(@RequestBody TrelloCardDto trelloCardDto) {
 //        return trelloClient.createNewBadges(trelloCardDto);
 //    }
-}

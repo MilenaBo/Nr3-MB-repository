@@ -30,8 +30,8 @@ public class TrelloBoardDto {
     @JsonProperty("lists")
     private List<TrelloListDto> lists;
 
-    @JsonProperty("badges")
-    private  Badges badges;
-
+// to było dodane w zadaniu 22.3, teraz w 29.1 musze zakomentować bo bruździ w TrelloMapper
+//    @JsonProperty("badges")
+//    private  Badges badges;
 
 }

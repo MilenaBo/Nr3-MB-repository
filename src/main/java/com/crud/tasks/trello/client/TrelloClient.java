@@ -1,10 +1,9 @@
 package com.crud.tasks.trello.client;
 
-import com.crud.tasks.config.TrelloConfig;
 import com.crud.tasks.domain.CreatedTrelloBadges;
 import com.crud.tasks.domain.TrelloBoardDto;
 import com.crud.tasks.domain.TrelloCardDto;
-import com.crud.tasks.mapper.CreatedTrelloCard;
+import com.crud.tasks.domain.CreatedTrelloCardDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,7 +75,7 @@ private static final Logger LOGGER = LoggerFactory.getLogger(TrelloClient.class)
         }
     }
 
-    public CreatedTrelloCard createNewCard(TrelloCardDto trelloCardDto) {
+    public CreatedTrelloCardDto createNewCard(TrelloCardDto trelloCardDto) {
         LOGGER.info("*********** Starting my createNewCar/TrelloClient 22.");
         URI url = UriComponentsBuilder.fromHttpUrl(trelloApiEndpoint + "/cards")
                 .queryParam("key", trelloAppKey)
@@ -86,7 +85,7 @@ private static final Logger LOGGER = LoggerFactory.getLogger(TrelloClient.class)
                 .queryParam("pos", trelloCardDto.getPos())
                 .queryParam("idList", trelloCardDto.getListId()).build().encode().toUri();
 
-        return restTemplate.postForObject(url, null, CreatedTrelloCard.class);
+        return restTemplate.postForObject(url, null, CreatedTrelloCardDto.class);
     }
 //22.3
     public CreatedTrelloBadges createNewBadges(TrelloCardDto trelloCardDto) {
