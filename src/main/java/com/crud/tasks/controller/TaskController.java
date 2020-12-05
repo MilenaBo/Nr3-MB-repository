@@ -32,7 +32,7 @@ public class TaskController {
         taskMapper.mapToTaskDto(service.delTask(taskId));}
 
     @RequestMapping(method = RequestMethod.POST,value = "createTask", consumes = APPLICATION_JSON_VALUE)
-    public void             createTask(@RequestBody TaskDto taskDto)  { service.saveTask(taskMapper.mapToTask(taskDto));}
+    public void            createTask(@RequestBody TaskDto taskDto)  { service.saveTask(taskMapper.mapToTask(taskDto));}
 
 }
 
