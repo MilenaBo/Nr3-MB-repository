@@ -63,6 +63,26 @@ public class TaskControllerTest {
                 .andExpect(jsonPath("$[0].title",is("test taskDto")))
                 .andExpect(jsonPath("$[0].content",is("content")));
     }
+
+    @Test
+    public void createTaskTest() throws Exception  {
+        //given
+        Task newTask = new Task(1L,"tasks title","content");
+        TaskDto newTaskDto = new TaskDto(1L,"tasksDto title","content");
+        List<TaskDto> theTasksList = new ArrayList<>();
+        theTasksList.add(newTaskDto);
+       when(dbService.saveTask(ArgumentMatchers.any(Task.class))).thenReturn(newTask);
+    Gson gson = new Gson();
+    String jsonContent = gson.toJson(newTaskDto);
+        //when        //then
+        mockMvc.perform(post("/v1/task/createTask")
+        .contentType(MediaType.APPLICATION_JSON)
+        .characterEncoding("UTF-8")
+        .content(jsonContent)).andExpect(status().isOk());
+    }
+}
+
+
 //    @Test
 //    public void getTaskTest() throws Exception {
 //        //given
@@ -80,38 +100,3 @@ public class TaskControllerTest {
 //                .andExpect(jsonPath("$[0].title",is("test taskDto")))
 //                .andExpect(jsonPath("$[0].content",is("content")));
 //    }
-    @Test
-    public void createTaskTest() throws Exception  {
-        //given
-        Task newTask = new Task(1L,"tasks title","content");
-        TaskDto newTaskDto = new TaskDto(1L,"tasksDto title","content");
-        List<TaskDto> theTasksList = new ArrayList<>();
-        theTasksList.add(newTaskDto);
-
- //      when(dbService.saveTask(ArgumentMatchers.any(Task.class))).thenReturn(newTask);
-       //when(dbService.saveTask(taskMapper.mapToTask(newTaskDto))).thenReturn(newTask);
-//Gson gson = new Gson();
-//String jsonContent = gson.toJson(newTaskDto);
-//
-//        //when        //then
-//        mockMvc.perform(post("/v1/task/createTask")
-//        .contentType(MediaType.APPLICATION_JSON)
-//        .characterEncoding("UTF-8")
-//        .content(jsonContent))
-//                .andExpect(jsonPath("$.id", is(1)))
-//                .andExpect(jsonPath("$.title", is("tasks title")))
-//                .andExpect(jsonPath("$.content", is("content")));
-    }
-
-
-
-    @Test
-    public void deleteTask() {
-        //given
-
-        //when
-
-        //then
-    }
-
-   }

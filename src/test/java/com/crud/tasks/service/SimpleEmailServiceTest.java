@@ -11,8 +11,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+
+import static org.mockito.Mockito.*;
 
 // @RunWith(...)niekompatybilne zmieniono 23.3s48
 @ExtendWith(MockitoExtension.class)
@@ -20,19 +20,26 @@ class SimpleEmailServiceTest {
 
     @InjectMocks
     private SimpleEmailService simpleEmailService;
+
     @Mock
     private JavaMailSender javaMailSender;
+    @Mock
+    private MailCreatorService mailCreatorService;
+
     @Test
     public  void shouldSendEmail() {
 
         //given
-       Mail mail = new Mail("test@test.com", "Test", "Test message.........","mbobran@seth.pl");
+       Mail mail = new Mail("test@test.com", "Test", "Test message..32.3 .......","mbobran@seth.pl");
 
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(mail.getMailTo());
         mailMessage.setSubject(mail.getSubject());
+        //mailMessage.setText(mail.getMessage()); zmiana w 32.3
         mailMessage.setText(mail.getMessage());
         mailMessage.setCc(mail.getToCc());
+
+        when(mailCreatorService.buildTrelloCardEmail(anyString())).thenReturn("Test message..32.3 .......");
 
         //when
         simpleEmailService.send(mail);
